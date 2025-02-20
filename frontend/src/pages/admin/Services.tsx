@@ -162,7 +162,7 @@ const AdminServices = () => {
                 <p className="text-gray-400 mt-2">{service.description}</p>
                 <div className="mt-4 flex justify-between text-sm text-gray-300">
                   <span>{service.duration} minutes</span>
-                  <span>${service.price}</span>
+                  <span> ৳ {service.price}</span>
                 </div>
               </div>
             ))}

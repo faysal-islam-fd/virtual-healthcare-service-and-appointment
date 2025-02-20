@@ -270,7 +270,7 @@ const BookAppointment: React.FC = () => {
                   </div>
                 ) : (
                   <div className="text-gray-600">
-                    Consultation fee: ${selectedService?.price}
+                    Consultation fee: ৳{selectedService?.price}
                     <p className="text-sm text-gray-500">You have used all your free appointments.</p>
                   </div>
                 )}

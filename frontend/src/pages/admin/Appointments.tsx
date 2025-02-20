@@ -104,14 +104,14 @@ const Appointments: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-700">
-                {filteredAppointments.map((appointment) => (
-                  <tr key={appointment._id}>
+                {filteredAppointments.map((appointment) => {
+                  return <tr key={appointment._id}>
                     <td className="px-6 py-4">
-                      <div className="text-white font-medium">{appointment.patient.name}</div>
-                      <div className="text-gray-400 text-sm">{appointment.patient.email}</div>
+                      <div className="text-white font-medium">{appointment.patient?.name || 'N/A'}</div>
+                      <div className="text-gray-400 text-sm">{appointment.patient?.email || 'N/A'}</div>
                     </td>
-                    <td className="px-6 py-4 text-gray-300">{appointment.doctor.name}</td>
-                    <td className="px-6 py-4 text-gray-300">{appointment.service.name}</td>
+                    <td className="px-6 py-4 text-gray-300">{appointment.doctor?.name || 'N/A'}</td>
+                    <td className="px-6 py-4 text-gray-300">{appointment.service?.name || 'N/A'}</td>
                     <td className="px-6 py-4 text-gray-300">
                       {format(new Date(appointment.date), 'MMM dd, yyyy')}
                     </td>
@@ -122,7 +122,7 @@ const Appointments: React.FC = () => {
                       </span>
                     </td>
                   </tr>
-                ))}
+                })}
               </tbody>
             </table>
           </div>

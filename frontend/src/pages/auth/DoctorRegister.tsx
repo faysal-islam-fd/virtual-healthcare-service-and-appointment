@@ -187,7 +187,7 @@ const DoctorRegister: React.FC = () => {
                 <option value="">Select a service</option>
                 {services.map((service) => (
                   <option key={service._id} value={service.name}>
-                    {service.name} - ${service.price} - {service.duration} mins
+                    {service.name} -  ৳ {service.price} - {service.duration} mins
                   </option>
                 ))}
               </select>
@@ -230,7 +230,7 @@ const DoctorRegister: React.FC = () => {
                   {...register('phoneNumber', { required: 'Phone number is required' })}
                   type="tel"
                   className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
-                  placeholder="+1 (555) 000-0000"
+                  placeholder="+8801*********"
                 />
                 {errors.phoneNumber && (
                   <p className="mt-1 text-sm text-red-400">{errors.phoneNumber.message}</p>

@@ -61,6 +61,33 @@ const AdminDoctors: React.FC = () => {
   const currentDoctors = filteredDoctors.slice(indexOfFirstDoctor, indexOfLastDoctor);
   const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
 
+  const handleDeleteDoctor = async (doctorId: string, doctorName: string) => {
+    if (!window.confirm(`Are you sure you want to delete Dr. ${doctorName}? This action cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:5000/api/admin/doctors/${doctorId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete doctor');
+      }
+
+      // Remove doctor from state
+      setDoctors(doctors.filter(doctor => doctor._id !== doctorId));
+      toast.success(`Dr. ${doctorName} has been deleted successfully`);
+    } catch (error) {
+      toast.error('Failed to delete doctor');
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <AdminDashboardLayout>
       <div className="p-6">
@@ -88,6 +115,7 @@ const AdminDoctors: React.FC = () => {
                     <th className="px-6 py-3 text-white">Specialization</th>
                     <th className="px-6 py-3 text-white">Status</th>
                     <th className="px-6 py-3 text-white">Appointments</th>
+                    <th className="px-6 py-3 text-white">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-700">
@@ -104,6 +132,14 @@ const AdminDoctors: React.FC = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-gray-300">{doctor.appointments}</td>
+                      <td className="px-6 py-4">
+                        <button
+                          onClick={() => handleDeleteDoctor(doctor._id, doctor.name)}
+                          className="text-red-400 hover:text-red-300 transition-colors"
+                        >
+                          Delete
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
